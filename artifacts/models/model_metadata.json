@@ -1,0 +1,104 @@
+{
+  "model_version": "v1.0.0",
+  "selected_model_name": "Logistic Regression (Baseline)",
+  "random_seed": 42,
+  "train_samples": 29982,
+  "test_samples": 7496,
+  "positive_class": 1,
+  "positive_class_label": "Charged Off (Default)",
+  "negative_class_label": "Fully Paid (Non-Default)",
+  "features_used": [
+    "loan_amount",
+    "annual_income",
+    "dti",
+    "int_rate",
+    "emp_length_years",
+    "total_acc",
+    "term",
+    "grade",
+    "home_ownership",
+    "verification_status",
+    "purpose",
+    "address_state"
+  ],
+  "leakage_exclusions_count": 12,
+  "dataset_metadata": {
+    "raw_total_records": 38576,
+    "excluded_current_records": 1098,
+    "completed_sample_count": 37478,
+    "class_0_fully_paid_count": 32145,
+    "class_1_charged_off_count": 5333,
+    "default_rate_pct": 14.23,
+    "numerical_features": [
+      "loan_amount",
+      "annual_income",
+      "dti",
+      "int_rate",
+      "emp_length_years",
+      "total_acc"
+    ],
+    "categorical_features": [
+      "term",
+      "grade",
+      "home_ownership",
+      "verification_status",
+      "purpose",
+      "address_state"
+    ],
+    "total_feature_count": 12
+  },
+  "metrics": {
+    "accuracy": 0.6443,
+    "precision": 0.2327,
+    "recall": 0.6523,
+    "f1_score": 0.343,
+    "roc_auc": 0.6953,
+    "pr_auc": 0.2709,
+    "confusion_matrix": {
+      "tn": 4134,
+      "fp": 2295,
+      "fn": 371,
+      "tp": 696,
+      "matrix_array": [
+        [
+          4134,
+          2295
+        ],
+        [
+          371,
+          696
+        ]
+      ]
+    },
+    "test_sample_count": 7496,
+    "test_positive_count": 1067,
+    "test_negative_count": 6429,
+    "classification_report": {
+      "0": {
+        "precision": 0.9176470588235294,
+        "recall": 0.6430237984134392,
+        "f1-score": 0.756173404060728,
+        "support": 6429.0
+      },
+      "1": {
+        "precision": 0.23269809428284854,
+        "recall": 0.6522961574507966,
+        "f1-score": 0.3430261212419911,
+        "support": 1067.0
+      },
+      "accuracy": 0.6443436499466382,
+      "macro avg": {
+        "precision": 0.575172576553189,
+        "recall": 0.6476599779321179,
+        "f1-score": 0.5495997626513596,
+        "support": 7496.0
+      },
+      "weighted avg": {
+        "precision": 0.820149654185735,
+        "recall": 0.6443436499466382,
+        "f1-score": 0.6973649527843683,
+        "support": 7496.0
+      }
+    }
+  }
+}
