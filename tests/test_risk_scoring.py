@@ -38,10 +38,28 @@ def test_score_record_success(scoring_engine, sample_valid_record):
     assert res["risk_category"] in ["Low Risk", "Medium Risk", "High Risk"]
     assert res["model_version"] == "v1.0.0"
 
-def test_risk_categorization_thresholds():
-    assert CreditRiskScoringEngine.categorize_risk(0.10) == "Low Risk"
-    assert CreditRiskScoringEngine.categorize_risk(0.20) == "Medium Risk"
-    assert CreditRiskScoringEngine.categorize_risk(0.50) == "High Risk"
+@pytest.mark.parametrize(
+    "probability, expected_category",
+    [
+        (0.00, "Low Risk"),
+        (0.10, "Low Risk"),
+        (0.149999, "Low Risk"),
+        (LOW_RISK_THRESHOLD - 1e-9, "Low Risk"),
+        (LOW_RISK_THRESHOLD, "Medium Risk"),
+        (0.15, "Medium Risk"),
+        (0.20, "Medium Risk"),
+        (0.349999, "Medium Risk"),
+        (HIGH_RISK_THRESHOLD - 1e-9, "Medium Risk"),
+        (HIGH_RISK_THRESHOLD, "High Risk"),
+        (0.35, "High Risk"),
+        (0.50, "High Risk"),
+        (1.00, "High Risk"),
+        (np.nan, "UNKNOWN"),
+        (float("nan"), "UNKNOWN"),
+    ]
+)
+def test_risk_categorization_thresholds(probability, expected_category):
+    assert CreditRiskScoringEngine.categorize_risk(probability) == expected_category
 
 def test_score_record_missing_required_field(scoring_engine, sample_valid_record):
     incomplete_record = sample_valid_record.copy()
